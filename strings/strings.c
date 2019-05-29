@@ -9,7 +9,18 @@
 */
 int string_length(char *s)
 {
+    // init counter
+    int counter = 0;
+    char c = *s;
+    while (c != '\0')
+    {
+        // while char at s is not '\0'
+        // increment counter and pointer
+        counter++;
+        c = s[counter];
+    }
 
+    return counter;
 }
 
 /*
@@ -20,7 +31,18 @@ int string_length(char *s)
 */
 char *reverse_string(char *rv, char *s)
 {
-
+    // get length of s
+    int len = string_length(s);
+    // loop len of s
+    int i;
+    for (i = 1; i <= len; i++)
+    {
+        // fill in rv with values of s
+        rv[i - 1] = s[len - i];
+    }
+    // null char at end of rv
+    rv[len] = '\0';
+    return rv;
 }
 
 #ifndef TESTING
@@ -37,4 +59,3 @@ int main(void)
     return 0;
 }
 #endif
-    
