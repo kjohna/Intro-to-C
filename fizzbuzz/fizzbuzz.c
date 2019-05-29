@@ -10,7 +10,34 @@
 */
 int fizzbuzz(int n)
 {
-
+    int i;
+    int skip_count;
+    skip_count = 0;
+    int printed;
+    printed = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (i % 3 == 0)
+        {
+            printf("Fizz");
+            printed = 1;
+        }
+        if (i % 5 == 0)
+        {
+            printf("Buzz");
+            printed = 1;
+        }
+        if (printed)
+        {
+            printf("\n");
+            printed = 0;
+        }
+        else
+        {
+            skip_count++;
+        }
+    }
+    return skip_count;
 }
 
 #ifndef TESTING
