@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /*
     Given a character pointer x (that points to an array of chars), and a
@@ -15,7 +16,20 @@
 */
 void string_copy(char *x, char *y)
 {
-
+    int i = 0;
+    // loop thru y
+    while (strcmp(&y[i], "\0") != 0)
+    {
+        x[i] = y[i];
+        i++;
+    }
+    // while (*(y + i) != "\0") // gives a warning for direct comparison
+    // {
+    //     *(x + i) = *(y + i);
+    //     i++;
+    // }
+    // copy the null terminator
+    x[i] = y[i];
 }
 
 /*
@@ -26,9 +40,30 @@ void string_copy(char *x, char *y)
 
     Do not use the `strchr` function from the standard library.
 */
-char *find_char(char *str, int c)
+char *find_char(char *str, char c)
 {
-
+    int i;
+    // loop thru str
+    int len = strlen(str);
+    for (i = 0; i < len; i++)
+    {
+        // printf("%c\n", str[i]);
+        if (str[i] == c)
+        {
+            return str + i;
+        }
+    }
+    return 0;
+    // while (strcmp(&str[i], &c) != 0)
+    // {
+    //     printf("%c\n", str[i]);
+    //     if (strcmp(&str[i], &c) == 0)
+    //     {
+    //         return 0;
+    //     }
+    //     i++;
+    // }
+    // return str + i;
 }
 
 /*
@@ -41,7 +76,32 @@ char *find_char(char *str, int c)
 */
 char *find_string(char *haystack, char *needle)
 {
-
+    int i, j, match;
+    int hay_len = strlen(haystack);
+    int nee_len = strlen(needle);
+    // loop through haystack, check if current char is first char of needle
+    for (i = 0; i < hay_len; i++)
+    {
+        // if we find first char of needle, see if needle exists by looping through needle and checking haystack
+        if (haystack[i] == needle[0])
+        {
+            match = 1;
+            for (j = 1; j < nee_len; j++)
+            {
+                if (haystack[i + j] != needle[j])
+                {
+                    match = 0;
+                    j = nee_len; // break loop
+                }
+            }
+            // if we found the complete needle, return current haystack position
+            if (match)
+            {
+                return haystack + i;
+            }
+        }
+    }
+    return 0;
 }
 
 #ifndef TESTING
